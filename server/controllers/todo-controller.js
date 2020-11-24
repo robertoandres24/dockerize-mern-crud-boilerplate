@@ -21,7 +21,7 @@ createTodo = (req, res) => {
     .then(() => {
       return res.status(201).json({
         success: true,
-        id: todo._id,
+        todo,
         message: 'Todo created!',
       })
     })

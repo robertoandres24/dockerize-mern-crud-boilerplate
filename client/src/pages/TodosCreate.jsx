@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TodoForm } from "../components";
 import { createTodo } from "../api";
 import { useHistory } from "react-router-dom";
+import { TodoContext } from "../context/TodoContext";
+
+
+
 
 const TodosCreate = () => {
+  const { setTodos } = useContext(TodoContext)
   const history = useHistory()
 
   const onSubmit = async (data) => {
-    await createTodo(data)
+    const { data: { todo } } = await createTodo(data)
+    setTodos(prevTodos => [...prevTodos, todo])
     history.push("/")
   };
 

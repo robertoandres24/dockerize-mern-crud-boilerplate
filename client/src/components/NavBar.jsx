@@ -15,6 +15,11 @@ class NavBar extends Component {
             <Link to="/create" className="nav-link">Create Todo</Link>
           </li>
         </ul>
+        <ul className="navbar-nav">
+          <li className="navbar-item">
+            <a href="#" className="nav-link"> Todos Count: 4</a>
+          </li>
+        </ul>
       </nav>
     )
   }

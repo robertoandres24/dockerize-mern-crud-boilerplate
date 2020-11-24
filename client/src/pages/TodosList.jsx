@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from 'react-router-dom'
-import { deleteTodo, getTodos } from "../api"
+import { TodoContext } from "../context/TodoContext";
+
 
 const TodosList = () => {
-
-
-  const removeTodo = async (id) => {
-    const { success } = await deleteTodo(id)
-    if (!success) return
-    setTodos(todos.filter(todo => todo._id !== id))
-  }
-
+  const { todos, removeTodo } = useContext(TodoContext)
   return (
     <div className="container">
       <div className="mt-3">
