@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-import { getTodos } from "../api"
+import { deleteTodo, getTodos } from "../api"
 
 const TodosList = () => {
-  const [todos, setTodos] = useState([])
 
-  useEffect(() => {
-    // define the fn and called later, 
-    // give me the possibility to use async await for axios promises
-    const fetchTodos = async () => {
-      const todos = await getTodos()
-      setTodos(todos)
-    }
-    fetchTodos()
-  }, [])
+
+  const removeTodo = async (id) => {
+    const { success } = await deleteTodo(id)
+    if (!success) return
+    setTodos(todos.filter(todo => todo._id !== id))
+  }
 
   return (
     <div className="container">
@@ -35,6 +31,7 @@ const TodosList = () => {
                   </td>
                   <td>
                     <Link to={`/edit/${todo._id}`}>Edit</Link>
+                    <button onClick={() => removeTodo(todo._id)} className="ml-4 btn-outline-danger btn">Remove</button>
                   </td>
                 </tr>
               ))

@@ -7,7 +7,7 @@ const api = axios.create({
 export const createTodo = payload => api.post(`/todo`, payload)
 export const getTodos = () => api.get(`/todos`).then(res => res.data.data)
 export const updateTodo = (id, payload) => api.put(`/todo/${id}`, payload)
-export const deleteTodo = id => api.delete(`/todo/${id}`)
+export const deleteTodo = id => api.delete(`/todo/${id}`).then(res => res.data)
 export const getTodo = id => api.get(`/todo/${id}`).then(res => res.data.data)
 
 const apis = {

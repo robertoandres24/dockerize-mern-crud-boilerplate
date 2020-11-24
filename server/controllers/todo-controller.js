@@ -74,12 +74,6 @@ deleteTodo = async (req, res) => {
     if (err) {
       return res.status(400).json({ success: false, error: err })
     }
-    if (todo == null) {
-      return res
-        .status(404)
-        .json({ success: false, error: `Todo not found` })
-    }
-
     return res.status(200).json({ success: true, data: todo })
   }).catch(err => console.log(err))
 }
