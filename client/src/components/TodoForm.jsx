@@ -7,6 +7,7 @@ const TodoForm = ({ todo, onSubmit }) => {
   });
 
   const submitHandler = handleSubmit((data) => {
+    console.log(data);
     onSubmit(data)
   });
 

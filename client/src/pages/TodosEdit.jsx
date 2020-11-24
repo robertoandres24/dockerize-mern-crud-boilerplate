@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { TodoForm } from "../components";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { getTodo, updateTodo } from "../api";
@@ -9,6 +9,8 @@ const TodosEdit = () => {
   const [todo, setTodo] = useState();
   const history = useHistory()
 
+  const { setTodos } = useContext(TodoContext)
+
   useEffect(() => {
     const fetchTodo = async () => {
       const todo = await getTodo(match.params.id)
@@ -18,7 +20,12 @@ const TodosEdit = () => {
   }, []);
 
   const onSubmit = async (data) => {
-    await updateTodo(match.params.id, data)
+    const { data: { id: idTodo } } = await updateTodo(match.params.id, data)
+    setTodos((prevTodos) => {
+      let foundIndex = prevTodos.findIndex(t => t._id == idTodo);
+      prevTodos[foundIndex] = { ...prevTodos[foundIndex], text: data.text }
+      return prevTodos
+    })
     history.push("/")
   }
 
