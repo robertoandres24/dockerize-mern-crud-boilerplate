@@ -9,7 +9,7 @@ const TodosEdit = () => {
   const [todo, setTodo] = useState();
   const history = useHistory()
 
-  const { setTodos } = useContext(TodoContext)
+  const { contextUpdateTodo } = useContext(TodoContext)
 
   useEffect(() => {
     const fetchTodo = async () => {
@@ -21,11 +21,7 @@ const TodosEdit = () => {
 
   const onSubmit = async (data) => {
     const { data: { id: idTodo } } = await updateTodo(match.params.id, data)
-    setTodos((prevTodos) => {
-      let foundIndex = prevTodos.findIndex(t => t._id == idTodo);
-      prevTodos[foundIndex] = { ...prevTodos[foundIndex], text: data.text }
-      return prevTodos
-    })
+    contextUpdateTodo({ id: idTodo, text: data.text })
     history.push("/")
   }
 

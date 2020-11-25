@@ -5,15 +5,13 @@ import { useHistory } from "react-router-dom";
 import { TodoContext } from "../context/TodoContext";
 
 
-
-
 const TodosCreate = () => {
-  const { setTodos } = useContext(TodoContext)
+  const { addTodo } = useContext(TodoContext)
   const history = useHistory()
 
   const onSubmit = async (data) => {
     const { data: { todo } } = await createTodo(data)
-    setTodos(prevTodos => [...prevTodos, todo])
+    addTodo(todo)
     history.push("/")
   };
 
