@@ -13,7 +13,7 @@ const TodoReducer = (state, action) => {
     case 'UPDATE':
       return {
         todos: state.todos.map(t => {
-          if (t._id == action.payload.id) {
+          if (t._id === action.payload.id) {
             return {
               ...t,
               text: action.payload.text

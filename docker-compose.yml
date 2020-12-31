@@ -1,16 +1,24 @@
 version: "3"
 services:
-  react-app:
-    image: react-app
+  react:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: dockerize-mern-react
     stdin_open: true
     ports: 
       - "3000:3000"
+    depends_on: 
+      - nodejs
     volumes:
       - ./client:/usr/src/app
     networks:
       - mern-app
-  api-server:
-    image: api-server
+  nodejs:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: dockerize-mern-node
     ports:
       - "5000:5000"
     networks:
@@ -24,6 +32,7 @@ services:
       - mongo
   mongo:
     image: mongo:3.6.19-xenial
+    container_name: dockerize-mern-mongo
     ports:
       - "27017:27017"
     networks:

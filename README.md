@@ -5,9 +5,22 @@ I followed [this tutorial](https://medium.com/swlh/how-to-create-your-first-mern
 I then containerized the api server and react client and created docker-compose to connect them.
 
 ---
+## MATCH NPM VERSION
+Install nvm in your machine. Instructions:    
+https://github.com/nvm-sh/nvm#nvmrc   
 
-Run `make build` from root to build containers
-Run `make run` from root to run containers with docker-compose
+Run this command in the root app    
+`nvm use`   
+
+If you work with multiple tabs in terminal, It is recomended to change the default nvm    
+`nvm alias default 14.15.0`
+
+## INSTALL CLIENT AND SERVER
+`cd client && npm i`    
+`cd server && npm i`
+## Lift up services in development   
+-d option is for execute process in background (detached mode)   
+`docker-compose up -d`  
 
 ---
 
